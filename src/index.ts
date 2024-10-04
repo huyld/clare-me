@@ -1,16 +1,10 @@
-import express, { Express, Request, Response } from 'express'
-import dotenv from 'dotenv'
+import Logger from './lib/Logger'
+import app from './app'
 
-dotenv.config()
+const port = process.env.PORT
 
-const app: Express = express()
-const port = process.env.PORT || 3000
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Intent Detection and Flow Management')
-})
-
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`)
-})
-
+app
+  .listen(port, () => {
+    Logger.info(`server running on port : ${port}`)
+  })
+  .on('error', (e) => Logger.error(e))
