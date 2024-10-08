@@ -8,7 +8,7 @@ const logger = createLogger({
       level: level,
       format: format.combine(
         format.errors({ stack: true }),
-        format.prettyPrint(),
+        level === 'debug' ? format.json() : format.prettyPrint(),
       ),
     }),
   ],
