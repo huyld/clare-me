@@ -44,4 +44,13 @@ export default class RedisCache {
       return null
     }
   }
+
+  async exists(key: string) {
+    try {
+      return await this.redisClient.exists(this.prefixKey(key))
+    } catch (err) {
+      Logger.error(`Failed to check if key exists ${this.prefixKey((key))}.`, err)
+      return 0
+    }
+  }
 }
