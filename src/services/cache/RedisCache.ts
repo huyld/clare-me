@@ -1,5 +1,6 @@
 import Redis from 'ioredis'
 import Logger from '../../lib/Logger'
+import { TTL_ONE_DAY } from './constants'
 
 export default class RedisCache {
   private redisClient: Redis
@@ -9,7 +10,7 @@ export default class RedisCache {
   constructor(
     redisClient: Redis,
     keyPrefix: string,
-    defaultTtlSeconds = 3599,
+    defaultTtlSeconds = TTL_ONE_DAY,
   ) {
     this.redisClient = redisClient
     this.keyPrefix = keyPrefix
@@ -36,7 +37,7 @@ export default class RedisCache {
 
   async get(key: string) {
     try {
-      let value = await this.redisClient.get(this.prefixKey(key))
+      const value = await this.redisClient.get(this.prefixKey(key))
 
       return value ? JSON.parse(value) : null
     } catch (err) {

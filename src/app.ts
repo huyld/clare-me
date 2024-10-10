@@ -9,7 +9,7 @@ process.on('uncaughtException', (e) => {
   Logger.error(e)
 })
 
-const authCache = buildCache('auth::')
+const authCache = buildCache({ keyPrefix: 'auth::' })
 const authService = new AuthService(authCache)
 const app: Express = express()
 
