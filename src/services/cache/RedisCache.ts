@@ -54,4 +54,23 @@ export default class RedisCache {
       return 0
     }
   }
+
+  async addToList(key: string, value: string): Promise<number> {
+    try {
+      return await this.redisClient.rpush(this.prefixKey(key), value)
+    } catch (err) {
+      Logger.error(`Failed to add item to list with key ${this.prefixKey(key)}.`, err)
+      return 0
+    }
+  }
+
+  async listAll(key: string) {
+    try {
+      const result = await this.redisClient.lrange(this.prefixKey(key), 0, -1)
+      return result
+    } catch (err) {
+      Logger.error(`Failed to extract items from list with key ${this.prefixKey(key)}.`, err)
+      return null
+    }
+  }
 }
