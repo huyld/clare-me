@@ -1,0 +1,29 @@
+version: '3.8'
+name: clareandme
+services:
+  redis:
+    image: redis
+    container_name: clarecache
+    expose:
+      - 6379
+    networks:
+      - bridgenetwork
+  app:
+    build: ./
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - 3000:3000
+    networks:
+      - bridgenetwork
+    environment:
+      - NODE_ENV
+      - PORT=3000
+      - REDIS_URL=redis://clarecache:6379
+    depends_on:
+      - redis
+    command:
+      sh -c 'npm i && npm run build && npm start'
+networks:
+  bridgenetwork:
+    driver: bridge
