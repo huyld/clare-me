@@ -21,6 +21,12 @@ function init(authService: AuthService, stores: Stores, flowService: FlowService
     conversation.retrieveContext,
   )
 
+  router.post(
+    '/updateContext',
+    authService.doAuth(),
+    conversation.updateContext,
+  )
+
   return router
 }
 

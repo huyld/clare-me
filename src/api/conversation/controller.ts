@@ -1,7 +1,9 @@
 import { Request, Response } from 'express'
 import { v4 as uuid } from 'uuid'
+import { get } from 'lodash'
 import FlowService from '../../services/flow'
 import Message from '../../models/Message'
+import Logger from '../../lib/Logger'
 
 const init = (flowService: FlowService) => ({
   sendMessage: async (req: Request, res: Response) => {
@@ -31,6 +33,24 @@ const init = (flowService: FlowService) => ({
       res.status(200).send(JSON.stringify(context))
     } else {
       res.status(200).send(JSON.stringify([]))
+    }
+  },
+
+  updateContext: async (req: Request, res: Response) => {
+    const body = req.body
+    try {
+      const message = {
+        id: get(body, 'id', uuid()),
+        from: body.from,
+        to: body.to,
+        text: body.text,
+        createdAt: Date.now(),
+      } as Message
+      await flowService.updateContext(message)
+      res.status(200).send()
+    } catch(err) {
+      Logger.error(`Failed to update context.`, err)
+      res.status(500).send('Error when updating context')
     }
   }
 })
