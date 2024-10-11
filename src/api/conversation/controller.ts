@@ -5,6 +5,7 @@ import FlowService from '../../services/flow'
 import Message from '../../models/Message'
 import Logger from '../../lib/Logger'
 import { CLARE_ID } from '../../lib/constants'
+import { INITIAL_CHECKIN_MESSAGE } from '../../services/flow/constants'
 
 const init = (flowService: FlowService) => ({
   sendMessage: async (req: Request, res: Response) => {
@@ -63,12 +64,33 @@ const init = (flowService: FlowService) => ({
         createdAt: Date.now(),
       } as Message
       await flowService.updateContext(message)
-      res.status(200).send()
+      res.status(200).send('Context updated.')
     } catch(err) {
       Logger.error(`Failed to update context.`, err)
       res.status(500).send('Error when updating context')
     }
-  }
+  },
+
+  initiateCheckIn: async (req: Request, res: Response) => {
+    const receiverId = get(req, 'body.to')
+    if (!receiverId) res.status(400).send('Bad request. Expect request body to have the format of { to: <receiverId> }.')
+
+    try {
+      const responseMessage = {
+        id: uuid(),
+        from: CLARE_ID,
+        to: receiverId,
+        text: INITIAL_CHECKIN_MESSAGE,
+        createdAt: Date.now(),
+      } as Message
+      await flowService.updateContext(responseMessage)
+
+      res.send(INITIAL_CHECKIN_MESSAGE)
+    } catch (err) {
+      Logger.error('An error occured when initiating check-in flow.', err)
+      res.status(500).send('An error occured when initiating check-in flow.')
+    }
+  },
 })
 
 export default init

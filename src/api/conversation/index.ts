@@ -27,6 +27,12 @@ function init(authService: AuthService, stores: Stores, flowService: FlowService
     conversation.updateContext,
   )
 
+  router.post(
+    '/initiateCheckIn',
+    authService.doAuth(),
+    conversation.initiateCheckIn,
+  )
+
   return router
 }
 

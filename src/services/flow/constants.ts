@@ -5,7 +5,10 @@ const GENERAL_RESPONSES = [
   'Is that everything?',
 ]
 
+const INITIAL_CHECKIN_MESSAGE = 'How are you doing today?'
+
 export {
   DEFAULT_RESPONSE_SUICIDAL_INTENT,
   GENERAL_RESPONSES,
+  INITIAL_CHECKIN_MESSAGE,
 }
