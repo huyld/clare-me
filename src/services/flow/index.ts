@@ -1,5 +1,5 @@
 import { get } from 'lodash'
-import { DEFAULT_RESPONSE_SUICIDAL_INTENT } from './constants'
+import { DEFAULT_RESPONSE_SUICIDAL_INTENT, GENERAL_RESPONSES } from './constants'
 import { FAQ } from '../../lib/constants'
 import Message from '../../models/Message'
 import Stores from '../../store/types/Stores'
@@ -41,6 +41,10 @@ export default class FlowService {
         break
       }
       default: {
+        // simple response generation
+        // TODO: take context into account
+        const chosenIndex = Date.now() % GENERAL_RESPONSES.length
+        response = GENERAL_RESPONSES[chosenIndex]
       }
     }
 
