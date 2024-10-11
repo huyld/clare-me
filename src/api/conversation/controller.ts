@@ -15,8 +15,9 @@ const init = (flowService: FlowService) => ({
       createdAt: Date.now(),
     } as Message
     await flowService.updateContext(message)
+    const response = await flowService.generateResponse(message)
 
-    res.send('This endpoint is still under construction.')
+    res.send(response)
   },
 
   retrieveContext: async (req: Request, res: Response) => {
