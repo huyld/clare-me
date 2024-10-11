@@ -1,8 +1,8 @@
+import { CLARE_ID } from '../lib/constants'
 import Logger from '../lib/Logger'
 import Message from '../models/Message'
 import RedisCache from '../services/cache/RedisCache'
 
-const CLARE_ID = 'clare'
 
 export default class ConversationStore {
   cache: RedisCache

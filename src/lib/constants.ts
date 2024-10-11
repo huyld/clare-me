@@ -52,7 +52,11 @@ If you have any issues with the payment process, please reach out to us by writi
 
 const FAQ_LIST = Object.keys(FAQ)
 
+
+const CLARE_ID = 'clare'
+
 export {
+  CLARE_ID,
   FAQ,
   FAQ_LIST,
 }

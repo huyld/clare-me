@@ -4,6 +4,7 @@ import { get } from 'lodash'
 import FlowService from '../../services/flow'
 import Message from '../../models/Message'
 import Logger from '../../lib/Logger'
+import { CLARE_ID } from '../../lib/constants'
 
 const init = (flowService: FlowService) => ({
   sendMessage: async (req: Request, res: Response) => {
@@ -14,7 +15,7 @@ const init = (flowService: FlowService) => ({
       const message = {
         id: uuid(),
         from: body.from,
-        to: 'clare',
+        to: CLARE_ID,
         text: body.text,
         createdAt: Date.now(),
       } as Message
