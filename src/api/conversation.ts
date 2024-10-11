@@ -1,12 +1,13 @@
 import express from 'express'
 import { v4 as uuid } from 'uuid'
 import AuthService from '../services/auth'
+import FlowService from '../services/flow'
 import Message from '../models/Message'
 import Stores from '../store/types/Stores'
 
 const router = express.Router()
 
-function init(authService: AuthService, stores: Stores) {
+function init(authService: AuthService, stores: Stores, flowService: FlowService) {
   router.get(
     '/',
     async (req, res) => {
@@ -27,7 +28,7 @@ function init(authService: AuthService, stores: Stores) {
         text: body.text,
         createdAt: Date.now(),
       } as Message
-      await stores.conversationStore.save(message)
+      await flowService.updateContext(message)
 
       res.send('This endpoint is still under construction.')
     },

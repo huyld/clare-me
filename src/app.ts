@@ -2,6 +2,7 @@ import express, { Express } from 'express'
 import Logger from './lib/Logger'
 import routes from './api'
 import AuthService from './services/auth'
+import FlowService from './services/flow'
 import storesInit from './store'
 import { buildCache } from './services/cache'
 
@@ -13,9 +14,10 @@ process.on('uncaughtException', (e) => {
 const authCache = buildCache({ keyPrefix: 'auth::' })
 const authService = new AuthService(authCache)
 const stores = storesInit()
+const flowService = new FlowService(stores)
 const app: Express = express()
 
 // Routes
-app.use('/', routes(authService, stores))
+app.use('/', routes(authService, stores, flowService))
 
 export default app
