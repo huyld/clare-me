@@ -17,6 +17,20 @@ const init = (flowService: FlowService) => ({
     await flowService.updateContext(message)
 
     res.send('This endpoint is still under construction.')
+  },
+
+  retrieveContext: async (req: Request, res: Response) => {
+    const userId = req.params.userId
+    if (!userId) {
+      res.status(404).send('No context found for requested user.')
+    }
+
+    const context = await flowService.getContext(userId)
+    if (context?.length) {
+      res.status(200).send(JSON.stringify(context))
+    } else {
+      res.status(200).send(JSON.stringify([]))
+    }
   }
 })
 
