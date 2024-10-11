@@ -8,18 +8,24 @@ import Logger from '../../lib/Logger'
 const init = (flowService: FlowService) => ({
   sendMessage: async (req: Request, res: Response) => {
     // TODO: Classify messages and handle flows.
-    const body = req.body
-    const message = {
-      id: uuid(),
-      from: body.from,
-      to: 'clare',
-      text: body.text,
-      createdAt: Date.now(),
-    } as Message
-    await flowService.updateContext(message)
-    const response = await flowService.generateResponse(message)
 
-    res.send(response)
+    try {
+      const body = req.body
+      const message = {
+        id: uuid(),
+        from: body.from,
+        to: 'clare',
+        text: body.text,
+        createdAt: Date.now(),
+      } as Message
+      await flowService.updateContext(message)
+      const response = await flowService.generateResponse(message)
+
+      res.send(response)
+    } catch (err) {
+      Logger.error('An error occured when processing incoming message.', err)
+      res.status(500).send('An error occured when processing the request.')
+    }
   },
 
   retrieveContext: async (req: Request, res: Response) => {
