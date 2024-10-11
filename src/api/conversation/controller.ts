@@ -8,7 +8,6 @@ import { CLARE_ID } from '../../lib/constants'
 
 const init = (flowService: FlowService) => ({
   sendMessage: async (req: Request, res: Response) => {
-    // TODO: Classify messages and handle flows.
 
     try {
       const body = req.body
@@ -20,7 +19,17 @@ const init = (flowService: FlowService) => ({
         createdAt: Date.now(),
       } as Message
       await flowService.updateContext(message)
+
+      // Add the response to context
       const response = await flowService.generateResponse(message)
+      const responseMessage = {
+        id: uuid(),
+        from: CLARE_ID,
+        to: body.from,
+        text: response,
+        createdAt: Date.now(),
+      } as Message
+      await flowService.updateContext(responseMessage)
 
       res.send(response)
     } catch (err) {
