@@ -1,6 +1,6 @@
-import { Intent, SUICIDAL_KEYWORDS } from "./constants"
-import Message from "../../models/Message"
-import { FAQ_LIST } from "../../lib/constants"
+import { Intent, SUICIDAL_KEYWORDS } from './constants'
+import Message from '../../models/Message'
+import { FAQ_LIST } from '../../lib/constants'
 
 export default class IntentService {
   getIntent(msg: Message): Intent {

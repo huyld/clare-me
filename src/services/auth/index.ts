@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express'
 import RedisCache from '../cache/RedisCache'
-import Logger from '../../lib/Logger';
+import Logger from '../../lib/Logger'
 
 const AUTH_METHOD = 'Bearer'
 

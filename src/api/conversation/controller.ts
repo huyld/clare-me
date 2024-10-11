@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express'
 import { v4 as uuid } from 'uuid'
-import FlowService from "../../services/flow";
-import Message from "../../models/Message";
+import FlowService from '../../services/flow'
+import Message from '../../models/Message'
 
 const init = (flowService: FlowService) => ({
   sendMessage: async (req: Request, res: Response) => {

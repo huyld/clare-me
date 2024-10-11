@@ -1,8 +1,8 @@
 export default interface Message {
-  id: string;
-  from: string;
-  to: string;
-  text: string;
-  createdAt: number;
+  id: string
+  from: string
+  to: string
+  text: string
+  createdAt: number
 }
 
