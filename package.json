@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "lint": "eslint .",
-    "test": "NODE_ENV=development && jest"
+    "test": "NODE_ENV=development docker compose up -d && jest && docker compose stop"
   },
   "author": "huyld",
   "license": "ISC",
