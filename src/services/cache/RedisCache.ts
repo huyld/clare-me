@@ -1,8 +1,8 @@
 import Redis from 'ioredis'
 import Logger from '../../lib/Logger'
-import { TTL_ONE_DAY } from './constants'
+import { CacheClient, TTL_ONE_DAY } from './constants'
 
-export default class RedisCache {
+export default class RedisCache implements CacheClient {
   private redisClient: Redis
   private defaultTtlSeconds: number
   private keyPrefix: string
