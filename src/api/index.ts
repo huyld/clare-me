@@ -13,7 +13,7 @@ const jsonMiddleware = bodyParser.json({
 
 function init(authService: AuthService, stores: Stores, flowService: FlowService) {
   router.use(jsonMiddleware)
-  router.use('/', conversation(authService, stores, flowService))
+  router.use('/v0', conversation(authService, stores, flowService))
   return router
 }
 

@@ -62,7 +62,7 @@ Below are the sample requests that can be use to manually test the running serve
 FAQ message
 ```bash
 curl --request POST \
-  --url http://localhost:3000/sendMessage \
+  --url http://localhost:3000/v0/sendMessage \
   --header 'Authorization: Bearer AaBbCc' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -75,7 +75,7 @@ curl --request POST \
 Suicidal message
 ```bash
 curl --request POST \
-  --url http://localhost:3000/sendMessage \
+  --url http://localhost:3000/v0/sendMessage \
   --header 'Authorization: Bearer AaBbCc' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -88,7 +88,7 @@ curl --request POST \
 Normal message
 ```bash
 curl --request POST \
-  --url http://localhost:3000/sendMessage \
+  --url http://localhost:3000/v0/sendMessage \
   --header 'Authorization: Bearer AaBbCc' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -101,14 +101,14 @@ curl --request POST \
 #### GET /retrieveContext
 ```bash
 curl --request GET \
-  --url http://localhost:3000/retrieveContext/U123 \
+  --url http://localhost:3000/v0/retrieveContext/U123 \
   --header 'Authorization: Bearer AaBbCc'
 ```
 
 #### POST /updateContext
 ```bash
 curl --request POST \
-  --url http://localhost:3000/updateContext \
+  --url http://localhost:3000/v0/updateContext \
   --header 'Authorization: Bearer AaBbCc' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -121,7 +121,7 @@ curl --request POST \
 #### POST /initiateCheckIn
 ```bash
 curl --request POST \
-  --url http://localhost:3000/initiateCheckin \
+  --url http://localhost:3000/v0/initiateCheckin \
   --header 'Authorization: Bearer AaBbCc' \
   --header 'Content-Type: application/json' \
   --data '{
